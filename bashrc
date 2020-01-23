@@ -100,3 +100,40 @@ function e2e() {
    python -m EndToEndTests.$2 $1
 }
 complete -F e2e_ e2e
+
+function cuinstall() {
+   cudf_version=0.12
+   rapids_channel=rapidsai-nightly
+   cuda_version=10.0
+   python_version=3.7
+
+   conda install --yes \
+      -c $rapids_channel \
+      -c nvidia \
+      -c conda-forge \
+      -c defaults \
+      dask-cuda=$cudf_version \
+      dask-cudf=$cudf_version \
+      cudf=$cudf_version \
+      python=$python_version \
+      cudatoolkit=$cuda_version
+
+   conda install --yes \
+      -c conda-forge \
+      openjdk=8.0 \
+      maven \
+      cmake \
+      gtest \
+      gmock \
+      rapidjson \
+      cppzmq \
+      cython=0.29 \
+      jpype1 \
+      netifaces \
+      pyhive
+
+   conda install --yes \
+      -c conda-forge \
+      -c blazingsql-nightly \
+      bsql-toolchain
+}
