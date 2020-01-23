@@ -222,10 +222,6 @@ def FlagsForFile(filename, **kwargs):
         database = ycm_core.CompilationDatabase(dirbase)
         break
 
-  with open('/dev/shm/ycm', 'w') as ycmf:
-    ycmf.write(dirbase)
-    ycmf.write('\n-----------------\n')
-
   if not database:
     return {
       'flags': BASE_FLAGS + flags,
