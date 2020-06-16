@@ -102,7 +102,7 @@ function e2e() {
 complete -F e2e_ e2e
 
 function cuinstall() {
-   cudf_version=0.12
+   cudf_version=0.13
    rapids_channel=rapidsai-nightly
    cuda_version=10.0
    python_version=3.7

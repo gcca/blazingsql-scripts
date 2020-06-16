@@ -7,8 +7,8 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_custom_ignore = '\v[\/](build|docs|api-doc|target|.*-env)$'
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_custom_ignore = '\v[\/](build|docs|api-doc|__pycache__|target|.*-env)$'
 
 Plugin 'scrooloose/nerdcommenter'
 
@@ -49,7 +49,7 @@ let g:cpp_no_function_highlight = 1
 
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_server_python_interpreter = '/usr/bin/python3'
+let g:ycm_server_python_interpreter = '/home/gcca/opt/miniconda2/envs/gct/bin/python3'
 let g:ycm_min_num_of_chars_for_completion = 3
 let g:ycm_max_num_candidates = 5
 let g:ycm_auto_trigger = 0
@@ -62,7 +62,7 @@ nnoremap <C-y> :YcmComplete GoTo<CR>
 autocmd BufNewFile,BufRead *.cu set filetype=cpp
 autocmd BufNewFile,BufRead *.cuh set filetype=cpp
 autocmd BufNewFile,BufRead /usr/include/* set filetype=cpp
-autocmd BufNewFile,BufRead /home/gcca/src/llvm/projects/libcxx/include/* set filetype=cpp
+"autocmd BufNewFile,BufRead /home/gcca/src/llvm/projects/libcxx/include/* set filetype=cpp
 
 Plugin 'moll/vim-bbye'
 
@@ -106,7 +106,7 @@ Plugin 'dag/vim-fish'
 
 "Plugin 'junegunn/goyo.vim'
 
-Plugin 'derekwyatt/vim-scala'
+"Plugin 'derekwyatt/vim-scala'
 
 "Plugin 'reedes/vim-thematic'
 
@@ -114,9 +114,9 @@ Plugin 'vim-scripts/ScrollColors'
 
 Plugin 'linluk/vim-c2h'
 
-Plugin 'scrooloose/nerdtree'
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+"Plugin 'scrooloose/nerdtree'
+"let g:NERDTreeDirArrowExpandable = '▸'
+"let g:NERDTreeDirArrowCollapsible = '▾'
 "autocmd vimenter * NERDTree
 "autocmd vimenter * NERDTreeautocmd StdinReadPre * let s:std_in=1
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -133,7 +133,7 @@ set number
 set wildignorecase
 set ignorecase
 set smartcase
-"set hlsearch
+set hlsearch
 set incsearch
 
 set magic
@@ -240,10 +240,12 @@ autocmd BufNewFile,BufRead /home/gcca/blazingdb/Simplicity/* set noet sw=4 ts=4 
 "set clipboard=unnamed
 set clipboard=unnamedplus
 
-autocmd Filetype python setlocal et ts=4 sts=4 sw=4
+autocmd Filetype python setlocal et ts=2 sts=2 sw=2
 autocmd Filetype cmake setlocal et ts=2 sts=2 sw=2
-autocmd Filetype cpp setlocal noet ts=2 sts=2 sw=2
-autocmd Filetype java setlocal noet ts=2 sts=2 sw=2
+autocmd Filetype cpp setlocal et ts=2 sts=2 sw=2
+autocmd Filetype java setlocal et ts=2 sts=2 sw=2
+autocmd Filetype bash setlocal et ts=2 sts=2 sw=2
+autocmd Filetype sh setlocal et ts=2 sts=2 sw=2
 
 "let g:thematic#themes = {
 "\ 'bubblegum'  : { 'typeface': 'Menlo',

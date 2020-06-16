@@ -148,12 +148,12 @@ def prepare_includes(*paths):
 CONDADIR = os.environ.get('CONDA_PREFIX', '/')
 
 BASE_FLAGS = prepare_includes(
-  # '/usr/include/c++/5',
+  '/usr/include/c++/5',
   # '/usr/include/c++/5/bits',
   # '/usr/include/x86_64-linux-gnu/c++/5',
   # '/usr/include/c++/5/tr1',
   # '/usr/include/c++/5/tr2',
-  '/usr/local/cuda-9.2/include',
+  #'/usr/local/cuda-9.2/include',
   # '/home/gcca/src/llvm/projects/libcxx/include',
 
 
@@ -165,12 +165,12 @@ BASE_FLAGS = prepare_includes(
   # '/home/gcca/src/flatbuffers/build/prefix/include',
 
   # ----- BLAZING
-  os.path.join(CONDADIR, 'include'),
-  os.path.join(CONDADIR, 'blazingsql/engine/src'),
+  # os.path.join(CONDADIR, 'include'),
+  # os.path.join(CONDADIR, 'blazingsql/engine/src'),
 )
 
 BASE_FLAGS += [
-  '-std=gnu++14',
+  '-std=gnu++17',
   '-Wall',
   '-Werror',
   '-Wextra',
@@ -188,6 +188,8 @@ BASE_FLAGS += [
   # '-Weverything',
   '-Wno-c++98-compat',
   '-Wno-c++98-compat-pedantic',
+
+  '-Wc++17-extensions',
 
   '-rdynamic',
 
@@ -222,25 +224,27 @@ def FlagsForFile(filename, **kwargs):
         database = ycm_core.CompilationDatabase(dirbase)
         break
 
+  FINAL_FLAGS = BASE_FLAGS + ['-I', dirbase]
+
   if not database:
     return {
-      'flags': BASE_FLAGS + flags,
+      'flags': FINAL_FLAGS + flags,
       'include_paths_relative_to_dir': DirectoryOfThisScript()
     }
 
-  compilation_info = GetCompilationInfoForFile( filename )
+  compilation_info = GetCompilationInfoForFile(filename)
   # with open('/dev/shm/sal.txt', 'w') as f:
     # f.write(compilation_info)
 
   if not compilation_info:
     return {
-      'flags': BASE_FLAGS,
+      'flags': FINAL_FLAGS,
       'include_paths_relative_to_dir': DirectoryOfThisScript()
     }
 
   # Bear in mind that compilation_info.compiler_flags_ does NOT return a
   # python list, but a "list-like" StringVec object.
-  final_flags = list( compilation_info.compiler_flags_ ) + BASE_FLAGS
+  final_flags = list(compilation_info.compiler_flags_) + FINAL_FLAGS
 
   # NOTE: This is just for YouCompleteMe; it's highly likely that your project
   # does NOT need to remove the stdlib flag. DO NOT USE THIS IN YOUR
