@@ -49,14 +49,15 @@ let g:cpp_no_function_highlight = 1
 
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_server_python_interpreter = '/home/gcca/opt/miniconda2/envs/gct/bin/python3'
-let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_server_python_interpreter = '/u16/gr/python/bin/python3'
+let g:ycm_min_num_of_chars_for_completion = 4
 let g:ycm_max_num_candidates = 5
 let g:ycm_auto_trigger = 0
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_complete_in_comments = 1
 let g:ycm_complete_in_strings = 1
 let g:ycm_add_preview_to_completeopt = 0
+let g:ycm_max_diagnostics_to_display = 0
 set completeopt-=preview
 nnoremap <C-y> :YcmComplete GoTo<CR>
 autocmd BufNewFile,BufRead *.cu set filetype=cpp
@@ -71,7 +72,7 @@ Plugin 'moll/vim-bbye'
 
 Plugin 'rhysd/vim-clang-format'
 let g:clang_format#code_style = 'llvm'
-let g:clang_format#command = '/opt/clang+llvm/bin/clang-format'
+let g:clang_format#command = '/u16/opt/clang+llvm/bin/clang-format'
 let g:clang_format#extra_args = '-sort-includes'
 "let g:clang_format#style_options = {
 "\ "Standard" : "C++11"}
@@ -91,8 +92,7 @@ au BufNewFile,BufRead *.cuh vnoremap <buffer><Leader>cf :ClangFormat<CR>
 "map <F9> :YcmCompleter FixIt<CR>
 
 "Plugin 'tpope/vim-fugitive'
-
-"Plugin 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter'
 
 Plugin 'whatyouhide/vim-lengthmatters'
 
@@ -113,6 +113,8 @@ Plugin 'dag/vim-fish'
 Plugin 'vim-scripts/ScrollColors'
 
 Plugin 'linluk/vim-c2h'
+
+Plugin 'posva/vim-vue'
 
 "Plugin 'scrooloose/nerdtree'
 "let g:NERDTreeDirArrowExpandable = '▸'
@@ -142,9 +144,9 @@ set showmatch
 
 set expandtab
 set smarttab
-set shiftwidth=3
-set tabstop=3
-set softtabstop=3
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
 
 set smartindent
 
@@ -158,7 +160,7 @@ if !has("gui_running")
    colorscheme base16-monokai
 else
 	set guioptions=
-	set guifont=Ubuntu\ Mono\ 12
+	set guifont=Ubuntu\ Mono\ 13
 	set lines=999 columns=87 linespace=0
    colorscheme base16-monokai
 endif
@@ -173,12 +175,12 @@ set complete-=i
 
 set comments=sl:/*,mb:\ *,elx:\ */
 
-set tags+=~/.vim/tags/c++
-set tags+=~/.vim/tags/gl
-set tags+=~/.vim/tags/sdl
-set tags+=~/.vim/tags/qt
+"set tags+=~/.vim/tags/c++
+"set tags+=~/.vim/tags/gl
+"set tags+=~/.vim/tags/sdl
+"set tags+=~/.vim/tags/qt
 
-autocmd BufWritePre * %s/\s\+$//e
+"autocmd BufWritePre * %s/\s\+$//e
 
 inoremap <C-s> <Esc>:w!<CR>a
 nnoremap <C-s> :w!<CR>
@@ -232,8 +234,6 @@ endfunction
 
 autocmd BufNewFile,BufRead * call CppSetSyntax()
 
-autocmd BufNewFile,BufRead /home/gcca/blazingdb/Simplicity/* set noet sw=4 ts=4 sts=4
-
 "autocmd BufNewFile,BufRead /home/gcca/lib/* set noet sw=4 ts=4 sts=4"
 "autocmd BufNewFile,BufRead /home/gcca/blazingdb/Simplicity/* colorscheme base16-gruvbox-dark-hard
 
@@ -246,50 +246,16 @@ autocmd Filetype cpp setlocal et ts=2 sts=2 sw=2
 autocmd Filetype java setlocal et ts=2 sts=2 sw=2
 autocmd Filetype bash setlocal et ts=2 sts=2 sw=2
 autocmd Filetype sh setlocal et ts=2 sts=2 sw=2
-
-"let g:thematic#themes = {
-"\ 'bubblegum'  : { 'typeface': 'Menlo',
-"\                  'font-size': 11,
-"\                  'transparency': 10,
-"\                  'linespace': 2,
-"\                },
-"\ 'pencil_dark' :{ 'colorscheme': 'pencil',
-"\                  'background': 'dark',
-"\                  'airline-theme': 'badwolf',
-"\                  'ruler': 1,
-"\                  'laststatus': 0,
-"\                  'typeface': 'Source Code Pro Light',
-"\                  'font-size': 11,
-"\                  'transparency': 10,
-"\                  'linespace': 8,
-"\                },
-"\ 'pencil_lite' :{ 'colorscheme': 'pencil',
-"\                  'background': 'light',
-"\                  'airline-theme': 'light',
-"\                  'laststatus': 0,
-"\                  'ruler': 1,
-"\                  'typeface': 'Source Code Pro',
-"\                  'fullscreen': 1,
-"\                  'transparency': 0,
-"\                  'font-size': 11,
-"\                  'linespace': 6,
-"\                },
-"\ 'matrix' :{ 'colorscheme': 'base16-greenscreen',
-"\             'typeface': 'Dotrice Condensed',
-"\             'font-size': '16',
-"\           },
-"\ }
-
-"let g:thematic#theme_name = 'matrix'
+autocmd Filetype htmldjango setlocal et ts=2 sts=2 sw=2
+autocmd Filetype javascript setlocal et ts=2 sts=2 sw=2
+"autocmd FileType cuda set ft=c.cuda
+"autocmd FileType cuda set ft=cpp.cuda
 
 function GZVsplitF()
   vsplit
-  vertical resize 88
+  vertical resize 89
 endfunction
 command GZVsplit execute "call GZVsplitF()"
-
-autocmd FileType cuda set ft=c.cuda
-autocmd FileType cuda set ft=cpp.cuda
 
 function RemoveTrailingWhitespaceF()
   %s/\s\+$//e

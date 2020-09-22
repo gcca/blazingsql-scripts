@@ -153,9 +153,8 @@ BASE_FLAGS = prepare_includes(
   # '/usr/include/x86_64-linux-gnu/c++/5',
   # '/usr/include/c++/5/tr1',
   # '/usr/include/c++/5/tr2',
-  #'/usr/local/cuda-9.2/include',
+  '/usr/local/cuda/include',
   # '/home/gcca/src/llvm/projects/libcxx/include',
-
 
   # '/home/gcca/opt/miniconda2/envs/ucx/ucx/prefix/include',
   # '/home/gcca/opt/miniconda2/envs/ucx/ucx/src',
@@ -165,8 +164,12 @@ BASE_FLAGS = prepare_includes(
   # '/home/gcca/src/flatbuffers/build/prefix/include',
 
   # ----- BLAZING
-  # os.path.join(CONDADIR, 'include'),
+  os.path.join(CONDADIR, 'include'),
   # os.path.join(CONDADIR, 'blazingsql/engine/src'),
+
+  '/u16/home/gcca/tmp/UCX/ucx/src',
+  '/u16/blazingsql/ucx/blazingsql/engine/src',
+  '/u16/blazingsql/ucx/blazingsql/thirdparty/cudf/cpp/include',
 )
 
 BASE_FLAGS += [
@@ -196,6 +199,12 @@ BASE_FLAGS += [
   #'-Wno-old-style-cast'
 ]
 
+def Settings(**kwargs):
+  FINAL_FLAGS = BASE_FLAGS
+  return {
+    'flags': FINAL_FLAGS
+  }
+
 def FlagsForFile(filename, **kwargs):
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
   # # if filename.endswith('.cu') or filename.endswith('.cuh'):
@@ -210,7 +219,6 @@ def FlagsForFile(filename, **kwargs):
     # #'include_paths_relative_to_dir': DirectoryOfThisScript()
   # }
   # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-
   global database
   database = None
   dirbase = filename
